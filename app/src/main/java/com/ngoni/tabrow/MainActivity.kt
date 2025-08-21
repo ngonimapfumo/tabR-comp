@@ -6,7 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.People
@@ -52,6 +55,9 @@ class MainActivity : ComponentActivity() {
                         var selectedTabIndex by remember {
                             mutableIntStateOf(0)
                         }
+                        val pagerState = rememberPagerState {
+                            tabItems.size
+                        }
                         Column(modifier = Modifier.fillMaxSize()) {
                             TabRow(selectedTabIndex = selectedTabIndex) {
                                 tabItems.forEachIndexed { index, tabItem ->
@@ -74,6 +80,16 @@ class MainActivity : ComponentActivity() {
                                         }
                                     )
                                 }
+                            }
+                            HorizontalPager(pagerState,
+                                modifier = Modifier.fillMaxWidth()
+                                    .weight(1f)) {
+                                    if (it == 0) {
+                                        Text(text= "Home")
+                                    } else {
+                                        Text(text= "People")
+                                    }
+
                             }
                         }
 
