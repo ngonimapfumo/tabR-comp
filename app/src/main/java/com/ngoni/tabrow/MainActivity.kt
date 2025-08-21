@@ -13,8 +13,10 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.People
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.PeopleOutline
+import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -44,6 +46,11 @@ class MainActivity : ComponentActivity() {
                 title = "People",
                 selectedIcon = Icons.Filled.People,
                 unSelectedIcon = Icons.Outlined.PeopleOutline
+            ),
+            TabItem(
+                title = "Phone",
+                selectedIcon = Icons.Filled.Phone,
+                unSelectedIcon = Icons.Outlined.Phone
             )
         )
 
@@ -93,12 +100,13 @@ class MainActivity : ComponentActivity() {
                             HorizontalPager(pagerState,
                                 modifier = Modifier.fillMaxWidth()
                                     .weight(1f)) {
-                                    if (it == 0) {
+                                val tabItemTitle = tabItems[it].title
+                                    if (tabItemTitle== "Home") {
                                         Text(text= "Home")
-                                    } else {
+                                    } else if (tabItemTitle== "Phone") {
+                                        Text(text= "Phone")
+                                    } else if (tabItemTitle == "People") {
                                         Text(text= "People")
-                                    }
-
                             }
                         }
 
@@ -107,4 +115,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
+}}
