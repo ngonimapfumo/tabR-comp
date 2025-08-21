@@ -101,13 +101,17 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxWidth()
                                     .weight(1f)) {
                                 val tabItemTitle = tabItems[it].title
-                                    if (tabItemTitle== "Home") {
+                                when (tabItemTitle) {
+                                    "Home" -> {
                                         Text(text= "Home")
-                                    } else if (tabItemTitle== "Phone") {
+                                    }
+                                    "Phone" -> {
                                         Text(text= "Phone")
-                                    } else if (tabItemTitle == "People") {
+                                    }
+                                    "People" -> {
                                         Text(text= "People")
-                            }
+                                    }
+                                }
                         }
 
                     }
