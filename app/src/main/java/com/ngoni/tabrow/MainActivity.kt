@@ -21,6 +21,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -57,6 +58,14 @@ class MainActivity : ComponentActivity() {
                         }
                         val pagerState = rememberPagerState {
                             tabItems.size
+                        }
+                        LaunchedEffect(selectedTabIndex) {
+                            pagerState.animateScrollToPage(selectedTabIndex)
+                        }
+                        LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
+                            if (!pagerState.isScrollInProgress) {
+                                selectedTabIndex = pagerState.currentPage
+                            }
                         }
                         Column(modifier = Modifier.fillMaxSize()) {
                             TabRow(selectedTabIndex = selectedTabIndex) {
